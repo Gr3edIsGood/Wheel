@@ -1,0 +1,22 @@
+body{
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 700;
+}
+.wrapper {
+    position: relative;
+    width: 800px;
+    display: block;
+    margin:0px auto 0;
+}
+ 
+#canvas {
+    z-index: 1;
+}
+ 
+.pointer {
+    position: absolute;
+    left: 44%;
+    top: 0px;
+    z-index: 999;
+}
+ 

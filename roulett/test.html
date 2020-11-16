@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>roulette</title>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+	<script src="Winwheel.min.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+		<canvas id='canvas' width='800' height='800'
+		           data-responsiveMinWidth="300"
+				    data-responsiveScaleHeight="true"
+				    data-responsiveMargin="50"
+				    onClick="startSpin();">
+		</canvas>
+		<img class="pointer" src="pointer.png" alt="pointer">
+	</div>
+    <script>
+	 
+		let theWheel = new Winwheel({
+		    'drawMode' : 'image',		
+		    'drawText' : true,		
+		    'numSegments'  : 12,          
+		    'imageOverlay' : true,      
+		    'lineWidth'    : 0,         
+		    'strokeStyle'  : null,
+		    'textFontFamily' : 'Montserrat',
+			'textFontSize' : 18,
+			'textFontWeight' : '700',
+			'textMargin'   : 15,
+    		'rotationAngle'   : -15,				
+		     'segments'    :
+	        [
+	            {'text' : 'Скидка 50%'},
+	            {'text' : 'Скидка 30%'},
+	            {'text' : 'Без выиграша'},
+	            {'text' : '25% скидка'},
+				{'text' : 'Каждая вторая упаковка \n со скидкой 50%'},
+	            {'text' : 'Бесплатная упаковка \n при покупке курса'},
+	            {'text' : 'Скидка 50%'},
+	            {'text' : 'Скидка 30%'},
+	            {'text' : 'Без выиграша'},
+	            {'text' : '25% скидка'},
+				{'text' : 'Каждая вторая упаковка \n со скидкой 50%'},
+	            {'text' : 'Бесплатная упаковка \n при покупке курса'},
+	        ],
+			'animation' :               
+			    {
+			        'type'     : 'spinToStop', 
+			        'duration' : 5,             
+			        'spins'    : 8             
+			    }                  
+		});
+		theWheel.segments[1].textFillStyle = '#ffffff';
+		theWheel.segments[2].textFillStyle = '#9c0401';
+		theWheel.segments[3].textFillStyle = '#ffffff';
+		theWheel.segments[4].textFillStyle = '#9c0401';
+		theWheel.segments[5].textFillStyle = '#ffffff';
+		theWheel.segments[6].textFillStyle = '#9c0401';
+		theWheel.segments[7].textFillStyle = '#ffffff';
+		theWheel.segments[8].textFillStyle = '#9c0401';
+		theWheel.segments[9].textFillStyle = '#ffffff';
+		theWheel.segments[10].textFillStyle = '#9c0401';
+		theWheel.segments[11].textFillStyle = '#ffffff';
+		theWheel.segments[12].textFillStyle = '#9c0401';
+		 
+		theWheel.draw();
+
+		 // Called by the onClick of the canvas, starts the spinning.
+		    function startSpin()
+		    {
+		        // Stop any current animation.
+		        theWheel.stopAnimation(false);
+		 
+		        // Reset the rotation angle to less than or equal to 360 so spinning again works as expected.
+		        // Setting to modulus (%) 360 keeps the current position.
+		        theWheel.rotationAngle = theWheel.rotationAngle % 360;
+		 
+		        // Start animation.
+		        theWheel.startAnimation();
+		    }
+		// Create new image object in memory.
+		let loadedImg = new Image();
+		 
+		// Create callback to execute once the image has finished loading.
+		loadedImg.onload = function()
+		{
+		    theWheel.wheelImage = loadedImg;    // Make wheelImage equal the loaded image object.
+		    theWheel.draw();                    // Also call draw function to render the wheel.
+		}
+		 
+		// Set the image source, once complete this will trigger the onLoad callback (above).
+		loadedImg.src = "Start.png";
+	</script>
+
+
+</body>
+</html>
